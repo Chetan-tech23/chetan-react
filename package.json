@@ -3,6 +3,8 @@
   "description": "This is cool React",
   "version": "1.0.0",
   "scripts": {
+    "local": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
