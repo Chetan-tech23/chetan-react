@@ -1,11 +1,34 @@
 import RestCard from "./RestCard";
-import restList from "../utils/mockData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
-  const [listOfRestaurant, setListOfRestaurant] = useState(restList);
+  const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  const [allRestList, setAllRestList] = useState([]);
 
-  return (
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const apiData = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.528913&lng=73.87441989999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+
+    const jsonData = await apiData.json();
+    setListOfRestaurant(
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+    setAllRestList(
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+  };
+
+  return listOfRestaurant.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <button
@@ -22,7 +45,7 @@ const Body = () => {
         <button
           className="filter-cancel-btn"
           onClick={() => {
-            setListOfRestaurant(restList);
+            setListOfRestaurant(allRestList);
           }}
         >
           All Restaurants
