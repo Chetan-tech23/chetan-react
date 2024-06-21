@@ -1,10 +1,12 @@
 import RestCard from "./RestCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
-  const [allRestList, setAllRestList] = useState([]);
+  const [filterRestList, setFilterRestList] = useState([]);
+  const [searchTxt, setSearchTxt] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -16,11 +18,12 @@ const Body = () => {
     );
 
     const jsonData = await apiData.json();
+    console.log(jsonData);
     setListOfRestaurant(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
-    setAllRestList(
+    setFilterRestList(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
@@ -30,30 +33,58 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filterList = listOfRestaurant.filter(
-              (res) => res.info.avgRating > 4
-            );
-            setListOfRestaurant(filterList);
-          }}
-        >
-          High Rated Restaurants
-        </button>
-        <button
-          className="filter-cancel-btn"
-          onClick={() => {
-            setListOfRestaurant(allRestList);
-          }}
-        >
-          All Restaurants
-        </button>
+      <div className="search-filter-container">
+        <div className="search">
+          <input
+            className="search-box"
+            type="text"
+            value={searchTxt}
+            onChange={(e) => {
+              setSearchTxt(e.target.value);
+            }}
+          />
+          <button
+            className="search-btn"
+            onClick={() => {
+              const filterList = listOfRestaurant.filter((res) =>
+                res.info.name.toLowerCase().includes(searchTxt.toLowerCase())
+              );
+              filterList.length !== 0 && setFilterRestList(filterList);
+            }}
+          >
+            Search
+          </button>
+        </div>
+        <div className="filter">
+          <button
+            className="filter-btn"
+            onClick={() => {
+              const filterList = listOfRestaurant.filter(
+                (res) => res.info.avgRating > 4
+              );
+              setFilterRestList(filterList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+          <button
+            className="filter-cancel-btn"
+            onClick={() => {
+              setFilterRestList(listOfRestaurant);
+            }}
+          >
+            All Restaurants
+          </button>
+        </div>
       </div>
       <div className="rest-container">
-        {listOfRestaurant.map((restaurant) => (
-          <RestCard key={restaurant.info.id} restObj={restaurant} />
+        {filterRestList.map((restaurant) => (
+          <Link
+            key={restaurant?.info?.id}
+            to={"/restaurants/" + restaurant?.info?.id}
+          >
+            <RestCard restObj={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
