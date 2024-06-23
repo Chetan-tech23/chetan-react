@@ -79,3 +79,8 @@
 .search {
   padding: 15px 10px;
 }
+
+.user-card {
+  padding: 5px;
+  border: 1px solid darkgray;
+}
