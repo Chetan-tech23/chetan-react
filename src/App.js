@@ -1,13 +1,15 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import RestMenu from "./components/RestMenu";
 import Contact from "./components/Contact";
-import About from "./components/About";
+// import About from "./components/About";
 import Error from "./components/Error";
 import RestMenu from "./components/RestMenu";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+
+const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
   return (
@@ -29,7 +31,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "/contact",
