@@ -17,7 +17,6 @@ const useRestaurantCards = () => {
         ?.restaurants
     );
   };
-  console.log(">>>>>> ", listOfRestaurant);
   return listOfRestaurant;
 };
 

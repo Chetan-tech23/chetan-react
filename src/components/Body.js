@@ -27,18 +27,21 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="search-filter-container">
-        <div className="search">
+      <div className="flex justify-between items-center">
+        <div className="search m-4">
           <input
-            className="search-box"
+            className=" shadow-xl border border-solid border-black text-start outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             type="text"
+            placeholder="🔍 Search"
             value={searchTxt}
             onChange={(e) => {
               setSearchTxt(e.target.value);
             }}
+            onFocus={(e) => (e.target.placeholder = "")}
+            onBlur={(e) => (e.target.placeholder = "🔍 Search")}
           />
           <button
-            className="search-btn"
+            className="px-4 py-2 m-4 bg-green-100 rounded-lg shadow-xl"
             onClick={() => {
               const filterList = listOfRestaurant.filter((res) =>
                 res.info.name.toLowerCase().includes(searchTxt.toLowerCase())
@@ -49,9 +52,9 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="filter">
+        <div className="search m-4 flex items-center">
           <button
-            className="filter-btn"
+            className="px-4 py-3 bg-green-100 mr-4 rounded-lg shadow-xl"
             onClick={() => {
               const filterList = listOfRestaurant.filter(
                 (res) => res.info.avgRating > 4
@@ -62,7 +65,7 @@ const Body = () => {
             Top Rated Restaurants
           </button>
           <button
-            className="filter-cancel-btn"
+            className="px-4 py-3 bg-green-100 my-4 rounded-lg shadow-xl"
             onClick={() => {
               setFilterRestList(listOfRestaurant);
             }}
@@ -71,7 +74,7 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="rest-container">
+      <div className="flex flex-wrap">
         {filterRestList.map((restaurant) => (
           <Link
             key={restaurant?.info?.id}
