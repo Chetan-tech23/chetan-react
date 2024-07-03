@@ -2,10 +2,13 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestMenu from "../utils/hooks/useRestMenu";
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestMenu(resId);
+
+  const [showIndex, setShowIndex] = useState(0);
 
   if (resInfo === null) return <Shimmer />;
 
@@ -29,10 +32,12 @@ const RestMenu = () => {
         {cuisines.join(", ")} - {costForTwoMessage}
       </p>
       {/* Categories Accordion */}
-      {categories.map((category) => (
+      {categories.map((category, index) => (
         <RestaurantCategory
           key={category.card.card.title}
           data={category?.card?.card}
+          showItems={index === showIndex ? true : false}
+          setShowIndex={() => setShowIndex(index)}
         />
       ))}
     </div>
