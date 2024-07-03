@@ -21,8 +21,8 @@ const Header = () => {
           <li className="px-4">
             <Link
               to="/"
-              className={`font-bold text-lg text-gray-800 hover:text-blue-500 ${
-                location.pathname === "/"
+              className={`font-bold text-lg hover:text-blue-500 ${
+                location?.pathname === "/"
                   ? "text-blue-500 underline underline-offset-2"
                   : ""
               }`}
@@ -33,7 +33,7 @@ const Header = () => {
           <li className="px-4">
             <Link
               to="/about"
-              className={`font-bold text-lg text-gray-800 hover:text-blue-500 ${
+              className={`font-bold text-lg hover:text-blue-500 ${
                 location.pathname === "/about"
                   ? "text-blue-500 underline underline-offset-2"
                   : ""
@@ -45,7 +45,7 @@ const Header = () => {
           <li className="px-4">
             <Link
               to="/contact"
-              className={`font-bold text-lg text-gray-800 hover:text-blue-500 ${
+              className={`font-bold text-lg hover:text-blue-500 ${
                 location.pathname === "/contact"
                   ? "text-blue-500 underline underline-offset-2"
                   : ""
@@ -54,9 +54,7 @@ const Header = () => {
               Contact Us
             </Link>
           </li>
-          <li className="px-4 text-gray-800 hover:text-blue-500 font-bold text-lg">
-            Cart
-          </li>
+          <li className="px-4 hover:text-blue-500 font-bold text-lg">Cart</li>
           <button
             className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600"
             onClick={() => {

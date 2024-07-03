@@ -1,4 +1,4 @@
-import RestCard from "./RestCard";
+import RestCard, { withHeaderLable } from "./RestCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -10,6 +10,8 @@ const Body = () => {
   const [filterRestList, setFilterRestList] = useState([]);
   const [searchTxt, setSearchTxt] = useState("");
   const onlineStatus = useOnlineStatus();
+
+  const RestCardWithHeader = withHeaderLable(RestCard);
 
   useEffect(() => {
     setFilterRestList(listOfRestaurant);
@@ -80,7 +82,11 @@ const Body = () => {
             key={restaurant?.info?.id}
             to={"/restaurants/" + restaurant?.info?.id}
           >
-            <RestCard restObj={restaurant} />
+            {restaurant.info.aggregatedDiscountInfoV3 ? (
+              <RestCardWithHeader restObj={restaurant} />
+            ) : (
+              <RestCard restObj={restaurant} />
+            )}
           </Link>
         ))}
       </div>
