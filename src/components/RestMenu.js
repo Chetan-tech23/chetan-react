@@ -25,6 +25,13 @@ const RestMenu = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
 
+  /**
+   *  Clicked same index for acordion is close/open
+   */
+  const handleCategoryClick = (index) => {
+    setShowIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
   return (
     <div className="text-center">
       <h1 className="font-bold my-6 text-2xl">{name}</h1>
@@ -36,8 +43,8 @@ const RestMenu = () => {
         <RestaurantCategory
           key={category.card.card.title}
           data={category?.card?.card}
-          showItems={index === showIndex ? true : false}
-          setShowIndex={() => setShowIndex(index)}
+          showItems={index === showIndex}
+          setShowIndex={() => handleCategoryClick(index)}
         />
       ))}
     </div>

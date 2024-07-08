@@ -1,17 +1,21 @@
 import RestCard, { withHeaderLable } from "./RestCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
 import useRestaurantCards from "../utils/hooks/useRestaurantCards";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const listOfRestaurant = useRestaurantCards();
   const [filterRestList, setFilterRestList] = useState([]);
   const [searchTxt, setSearchTxt] = useState("");
+
   const onlineStatus = useOnlineStatus();
 
   const RestCardWithHeader = withHeaderLable(RestCard);
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     setFilterRestList(listOfRestaurant);
@@ -55,6 +59,13 @@ const Body = () => {
           </button>
         </div>
         <div className="search m-4 flex items-center">
+          <input
+            className="px-2 py-2 mr-4 border border-black shadow-lg rounded-md"
+            placeholder="Logged User"
+            type="text"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
           <button
             className="px-4 py-3 bg-green-100 mr-4 rounded-lg shadow-xl"
             onClick={() => {
