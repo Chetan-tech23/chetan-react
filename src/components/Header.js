@@ -24,14 +24,14 @@ const Header = () => {
         <img className="w-56" src={LOGO_URL} />
       </div>
       <div className="flex items-center">
-        <ul className="flex p-4 m-4 space-x-4">
-          <li className="px-4 font-bold text-lg">
+        <ul className="flex p-4 m-4 space-x-2">
+          <li className="px-4 font-bold">
             Online status: {onlineStatus ? "🟢" : "🔴"}
           </li>
-          <li className="px-4">
+          <li className="px-2">
             <Link
               to="/"
-              className={`font-bold text-lg hover:text-blue-500 ${
+              className={`font-bold hover:text-blue-500 ${
                 location?.pathname === "/"
                   ? "text-blue-500 underline underline-offset-2"
                   : ""
@@ -40,10 +40,10 @@ const Header = () => {
               Home
             </Link>
           </li>
-          <li className="px-4">
+          <li className="px-2">
             <Link
               to="/about"
-              className={`font-bold text-lg hover:text-blue-500 ${
+              className={`font-bold hover:text-blue-500 ${
                 location.pathname === "/about"
                   ? "text-blue-500 underline underline-offset-2"
                   : ""
@@ -52,10 +52,10 @@ const Header = () => {
               About Us
             </Link>
           </li>
-          <li className="px-4">
+          <li className="px-2">
             <Link
               to="/contact"
-              className={`font-bold text-lg hover:text-blue-500 ${
+              className={`font-bold hover:text-blue-500 ${
                 location.pathname === "/contact"
                   ? "text-blue-500 underline underline-offset-2"
                   : ""
@@ -64,7 +64,7 @@ const Header = () => {
               Contact Us
             </Link>
           </li>
-          <li className="px-4">
+          <li className="px-2">
             <Link to="/cart">
               {/* This avg img code take on google */}
               <div className="flex">
@@ -74,7 +74,7 @@ const Header = () => {
                   viewBox="0 0 24 24"
                   stroke-width="2"
                   stroke="currentColor"
-                  class={`h-8 w-8 text-black hover:text-blue-500 ${
+                  class={`h-6 w-6 text-black hover:text-blue-500 ${
                     location.pathname === "/cart" ? "text-blue-500" : ""
                   }`}
                 >
@@ -85,7 +85,7 @@ const Header = () => {
                   />
                 </svg>
                 {cartItems.length > 0 && (
-                  <div className="absolute pl-6">
+                  <div className="absolute pl-6 py-0">
                     <span class="rounded-full bg-red-500 p-0.1 px-1 text-sm text-red-50">
                       {cartItems.length}
                     </span>
@@ -95,7 +95,7 @@ const Header = () => {
             </Link>
           </li>
           <button
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600"
+            className="px-2 py-1.5 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600"
             onClick={() => {
               loginBtn === "Login"
                 ? setLoginBtn("Logout")
@@ -104,7 +104,7 @@ const Header = () => {
           >
             {loginBtn}
           </button>
-          <li className="px-2 font-bold text-lg">{loggedInUser}</li>
+          <li className="px- font-bold">{loggedInUser}</li>
         </ul>
       </div>
     </div>
