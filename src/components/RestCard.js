@@ -6,6 +6,8 @@ const RestCard = (props) => {
   const { name, cuisines, avgRating, sla, cloudinaryImageId, costForTwo } =
     restObj?.info;
 
+  console.log(restObj.info);
+
   return (
     <div className="m-2 p-4 w-[250px] bg-green-100 rounded-lg shadow-lg shadow-gray-400 overflow-hidden hover:shadow-xl hover:bg-green-200 transform hover:scale-105 transition-transform duration-300">
       <img
