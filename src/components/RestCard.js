@@ -6,8 +6,6 @@ const RestCard = (props) => {
   const { name, cuisines, avgRating, sla, cloudinaryImageId, costForTwo } =
     restObj?.info;
 
-  console.log(restObj.info);
-
   return (
     <div className="m-2 p-4 w-[250px] bg-green-100 rounded-lg shadow-lg shadow-gray-400 overflow-hidden hover:shadow-xl hover:bg-green-200 transform hover:scale-105 transition-transform duration-300">
       <img
@@ -35,7 +33,7 @@ export const withHeaderLable = (RestCard) => {
     const { header, subHeader } = restObj?.info?.aggregatedDiscountInfoV3;
 
     return (
-      <div>
+      <div data-testid="res-card">
         <label className="absolute z-10 text-white m-2 p-2 items-center font-extrabold bg-slate-900 rounded-md">
           {header + " " + subHeader}
         </label>

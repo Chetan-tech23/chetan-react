@@ -38,6 +38,7 @@ const Body = () => {
           <input
             className=" shadow-xl border border-solid border-black text-start outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             type="text"
+            data-testid="search-input"
             placeholder="🔍 Search"
             value={searchTxt}
             onChange={(e) => {
