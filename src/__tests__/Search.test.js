@@ -14,7 +14,23 @@ global.fetch = jest.fn(() => {
 });
 
 describe("Search functionality test cases", () => {
-  it("Should render Body component with Search", async () => {
+  // beforeAll(() => {
+  //   console.log("Run this functon before all in one time");
+  // });
+
+  // beforeEach(() => {
+  //   console.log("Run this function before each an every test case");
+  // });
+
+  // afterAll(() => {
+  //   console.log("Run this functon after all in one time");
+  // });
+
+  // afterEach(() => {
+  //   console.log("Run this function after each an every test case");
+  // });
+
+  it("Should search Reslist of burger input", async () => {
     await act(async () =>
       render(
         <BrowserRouter>
@@ -22,6 +38,9 @@ describe("Search functionality test cases", () => {
         </BrowserRouter>
       )
     );
+
+    const cardBeforeSearch = screen.getAllByTestId("res-card");
+    expect(cardBeforeSearch.length).toBe(18);
 
     const serachBtn = screen.getByRole("button", { name: "Search" });
 
@@ -31,9 +50,29 @@ describe("Search functionality test cases", () => {
 
     fireEvent.click(serachBtn);
 
-    const card = screen.getAllByTestId("res-card");
+    const cardAfterSearch = screen.getAllByTestId("res-card");
+    expect(cardAfterSearch.length).toBe(2);
+  });
 
-    // Assertion - screen should  2 cards
-    expect(card.length).toBe(2);
+  it("Should filter Top rated restaurant", async () => {
+    await act(async () =>
+      render(
+        <BrowserRouter>
+          <Body />
+        </BrowserRouter>
+      )
+    );
+
+    const cardBeforeFilter = screen.getAllByTestId("res-card");
+    expect(cardBeforeFilter.length).toBe(18);
+
+    const topRatedBtn = screen.getByRole("button", {
+      name: "Top Rated Restaurants",
+    });
+
+    fireEvent.click(topRatedBtn);
+
+    const cardAfterFilter = screen.getAllByTestId("res-card");
+    expect(cardAfterFilter.length).toBe(16);
   });
 });
